@@ -2,74 +2,129 @@
 #include <iostream>
 #include <vector>
 #include <gtest/gtest.h>
+#include <chrono>
 
-// TEST(MatrixMultiplicationTest, TestMultiplyMatricesStandard)
-// Verifica che la moltiplicazione standard tra matrici funzioni correttamente.
-TEST(MatrixMultiplicationTest, TestMultiplyMatricesStandard) {
-    std::vector<std::vector<int>> A = {
-        {1, 2, 3},
-        {4, 5, 6}
-    };
-    std::vector<std::vector<int>> B = {
-        {7, 8},
-        {9, 10},
-        {11, 12}
-    };
-    std::vector<std::vector<int>> C(2, std::vector<int>(2, 0));
+// Test per verificare la corretta moltiplicazione di due matrici 2x3 e 3x2.
+// Risultato atteso: [[58, 64], [139, 154]]
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices) {
+   std::vector<std::vector<int>> A = {
+       {1, 2, 3},
+       {4, 5, 6}
+   };
+   std::vector<std::vector<int>> B = {
+       {7, 8},
+       {9, 10},
+       {11, 12}
+   };
 
-    multiplyMatrices(A, B, C, 2, 3, 2);
+   std::vector<std::vector<int>> C(2, std::vector<int>(2, 0));
 
-    std::vector<std::vector<int>> expected = {
-        {58, 64},
-        {139, 154}
-    };
+   multiplyMatrices(A, B, C, 2, 3, 2);
 
-    ASSERT_EQ(C, expected) << "Matrix multiplication test failed!";
+   std::vector<std::vector<int>> expected = {
+       {58, 64},
+       {139, 154}
+   };
+
+   ASSERT_EQ(C, expected) << "Matrix multiplication test failed!";
 }
 
-// Verifica il comportamento della funzione quando entrambe le matrici sono vuote.
+// Test per gestire il caso in cui entrambe le matrici sono vuote.
+/*// Risultato atteso: Matrice vuota
 TEST(MatrixMultiplicationTest, HandlesEmptyMatrices) {
-    std::vector<std::vector<int>> A = {};
-    std::vector<std::vector<int>> B = {};
-    std::vector<std::vector<int>> C;
-    multiplyMatrices(A, B, C, 0, 0, 0);
-    ASSERT_TRUE(C.empty()) << "Test with empty matrices failed!";
-}
+   std::vector<std::vector<int>> A = {};
+   std::vector<std::vector<int>> B = {};
+   std::vector<std::vector<int>> C;
 
-// Verifica la corretta moltiplicazione di matrici 1x1.
+   multiplyMatrices(A, B, C, 0, 0, 0);
+
+   ASSERT_TRUE(C.empty()) << "Test with empty matrices failed!";
+}*/
+
+// Test per la moltiplicazione di due matrici 1x1.
+// Risultato atteso: [[2]]
 TEST(MatrixMultiplicationTest, Handles1x1Matrix) {
-    std::vector<std::vector<int>> A = {{1}};
-    std::vector<std::vector<int>> B = {{2}};
-    std::vector<std::vector<int>> C(1, std::vector<int>(1));
-    multiplyMatrices(A, B, C, 1, 1, 1);
-    EXPECT_EQ(C[0][0], 2) << "Test with 1x1 matrices failed!";
+   std::vector<std::vector<int>> A = {{1}};
+   std::vector<std::vector<int>> B = {{2}};
+   std::vector<std::vector<int>> C(1, std::vector<int>(1));
+
+   multiplyMatrices(A, B, C, 1, 1, 1);
+
+   EXPECT_EQ(C[0][0], 2) << "Test with 1x1 matrices failed!";
 }
 
 // Test per matrici di dimensioni diverse ma compatibili per la moltiplicazione.
+// Risultato atteso: [[4, 4], [10, 8]]
 TEST(MatrixMultiplicationTest, HandlesDifferentSizes) {
-    std::vector<std::vector<int>> A = {{1, 2}, {3, 4}};
-    std::vector<std::vector<int>> B = {{2, 0}, {1, 2}};
-    std::vector<std::vector<int>> C(2, std::vector<int>(2));
-    multiplyMatrices(A, B, C, 2, 2, 2);
-    ASSERT_EQ(C[0][0], 4) << "Test with different sizes failed!";
-    ASSERT_EQ(C[0][1], 4) << "Test with different sizes failed!";
-    ASSERT_EQ(C[1][0], 10) << "Test with different sizes failed!";
-    ASSERT_EQ(C[1][1], 8) << "Test with different sizes failed!";
+   std::vector<std::vector<int>> A = {
+       {1, 2}, 
+       {3, 4}
+   };
+   std::vector<std::vector<int>> B = {
+       {2, 0}, 
+       {1, 2}
+   };
+   std::vector<std::vector<int>> C(2, std::vector<int>(2));
+
+   multiplyMatrices(A, B, C, 2, 2, 2);
+
+   ASSERT_EQ(C[0][0], 4) << "Test with different sizes failed!";
+   ASSERT_EQ(C[0][1], 4) << "Test with different sizes failed!";
+   ASSERT_EQ(C[1][0], 10) << "Test with different sizes failed!";
+   ASSERT_EQ(C[1][1], 8) << "Test with different sizes failed!";
 }
 
-// Verifica il comportamento della funzione con valori negativi nelle matrici.
+// Test per verificare la moltiplicazione di matrici contenenti valori negativi.
+// Risultato atteso: [[0, -4], [-2, -8]]
 TEST(MatrixMultiplicationTest, HandlesNegativeValues) {
-    std::vector<std::vector<int>> A = {{-1, -2}, {-3, -4}};
-    std::vector<std::vector<int>> B = {{2, 0}, {1, 2}};
-    std::vector<std::vector<int>> C(2, std::vector<int>(2));
-    multiplyMatrices(A, B, C, 2, 2, 2);
-    ASSERT_EQ(C[0][0], 0) << "Test with negative values failed!";
-    ASSERT_EQ(C[0][1], -4) << "Test with negative values failed!";
-    ASSERT_EQ(C[1][0], -2) << "Test with negative values failed!";
-    ASSERT_EQ(C[1][1], -8) << "Test with negative values failed!";
+   std::vector<std::vector<int>> A = {
+       {-1, -2}, 
+       {-3, -4}
+   };
+   std::vector<std::vector<int>> B = {
+       {2, 0},
+       {1, 2}
+   };
+   std::vector<std::vector<int>> C(2, std::vector<int>(2));
+   
+   multiplyMatrices(A, B, C, 2, 2, 2);
+   
+   ASSERT_EQ(C[0][0], 0) << "Test with negative values failed!";
+   ASSERT_EQ(C[0][1], -4) << "Test with negative values failed!";
+   ASSERT_EQ(C[1][0], -2) << "Test with negative values failed!";
+   ASSERT_EQ(C[1][1], -8) << "Test with negative values failed!";
 }
 
+// Test di performance per valutare il tempo di esecuzione della funzione con matrici di grandi dimensioni.
+// Il risultato atteso è che il tempo di esecuzione sia entro un limite ragionevole, qui presunto meno di 10000 ms.
+/*TEST(MatrixMultiplicationTest, PerformanceTest) {
+    int size = 500;  // Grande dimensione per test di performance
+    std::vector<std::vector<int>> A(size, std::vector<int>(size, 1));
+    std::vector<std::vector<int>> B(size, std::vector<int>(size, 2));
+    std::vector<std::vector<int>> C(size, std::vector<int>(size, 0));
+
+    auto start = std::chrono::high_resolution_clock::now();
+    multiplyMatrices(A, B, C, size, size, size);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> elapsed = end - start;
+
+    std::cout << "Performance Test: Elapsed time is " << elapsed.count() << " ms\n";
+    ASSERT_TRUE(elapsed.count() < 10000);  // Il test passa se il tempo è minore di 10000 ms.
+}*/
+// Stress test per verificare la capacità della funzione di gestire matrici di dimensione estremamente grande.
+// Questo test può aiutare a identificare problemi di gestione della memoria o di prestazione in scenari estremi.
+// Il risultato atteso è che la funzione completi la moltiplicazione senza errori e in un tempo ragionevole.
+TEST(MatrixMultiplicationTest, StressTest) {
+    int size = 100;  // Dimensione estremamente grande per test di stress
+    std::vector<std::vector<int>> A(size, std::vector<int>(size, 1));
+    std::vector<std::vector<int>> B(size, std::vector<int>(size, 1));
+    std::vector<std::vector<int>> C(size, std::vector<int>(size, 0));
+
+    multiplyMatrices(A, B, C, size, size, size);
+    // Verifica un valore semplice per assicurarsi che la moltiplicazione sia stata completata
+    ASSERT_EQ(C[0][0], size); // Verifica che il valore in posizione C[0][0] sia corretto, indicativo del completamento.
+}
 int main(int argc, char **argv) {
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+   testing::InitGoogleTest(&argc, argv);
+   return RUN_ALL_TESTS();
 }
