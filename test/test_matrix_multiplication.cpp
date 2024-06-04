@@ -30,7 +30,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices) {
 }
 
 // Test per gestire il caso in cui entrambe le matrici sono vuote.
-/*// Risultato atteso: Matrice vuota
+// Risultato atteso: Matrice vuota
 TEST(MatrixMultiplicationTest, HandlesEmptyMatrices) {
    std::vector<std::vector<int>> A = {};
    std::vector<std::vector<int>> B = {};
@@ -39,7 +39,7 @@ TEST(MatrixMultiplicationTest, HandlesEmptyMatrices) {
    multiplyMatrices(A, B, C, 0, 0, 0);
 
    ASSERT_TRUE(C.empty()) << "Test with empty matrices failed!";
-}*/
+}
 
 // Test per la moltiplicazione di due matrici 1x1.
 // Risultato atteso: [[2]]
@@ -97,7 +97,7 @@ TEST(MatrixMultiplicationTest, HandlesNegativeValues) {
 
 // Test di performance per valutare il tempo di esecuzione della funzione con matrici di grandi dimensioni.
 // Il risultato atteso è che il tempo di esecuzione sia entro un limite ragionevole, qui presunto meno di 10000 ms.
-/*TEST(MatrixMultiplicationTest, PerformanceTest) {
+TEST(MatrixMultiplicationTest, PerformanceTest) {
     int size = 500;  // Grande dimensione per test di performance
     std::vector<std::vector<int>> A(size, std::vector<int>(size, 1));
     std::vector<std::vector<int>> B(size, std::vector<int>(size, 2));
@@ -110,8 +110,7 @@ TEST(MatrixMultiplicationTest, HandlesNegativeValues) {
 
     std::cout << "Performance Test: Elapsed time is " << elapsed.count() << " ms\n";
     ASSERT_TRUE(elapsed.count() < 10000);  // Il test passa se il tempo è minore di 10000 ms.
-}*/
-// Stress test per verificare la capacità della funzione di gestire matrici di dimensione estremamente grande.
+}// Stress test per verificare la capacità della funzione di gestire matrici di dimensione estremamente grande.
 // Questo test può aiutare a identificare problemi di gestione della memoria o di prestazione in scenari estremi.
 // Il risultato atteso è che la funzione completi la moltiplicazione senza errori e in un tempo ragionevole.
 TEST(MatrixMultiplicationTest, StressTest) {
