@@ -10,5 +10,9 @@ Sono definiti cinque test distinti per verificare diversi aspetti della funzione
     HandlesNegativeValues: Verifica la corretta gestione dei valori negativi all'interno delle matrici durante la moltiplicazione.
 Oltre i 5 test unitari sono presenti anche uno stress test finalizzato a testare il funzionamento del codice nel caso di dimensioni di una matrice molto grandi ed un performance test che verifica
 se è possibile eseguire il programma all'interno di un lasso di tempo prestabilito.
+Tra le criticità nella fase di testing abbiamo trovato:
+1- errori nella moltiplicazione tra matrici contenenti valori negativi.
+2-problemi legati alla gestione di vettori non inizializzati, infatti i test spesso degeneravano in segmentation fault.
+3-
 
 
