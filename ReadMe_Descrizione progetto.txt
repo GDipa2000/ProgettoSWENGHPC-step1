@@ -1,0 +1,14 @@
+Nella seguente repository è stata implementato il source code di matrix_multiplication.cpp il quale contiene   un insieme di test unitari scritti utilizzando la libreria Google Test
+per verificare la correttezza e le prestazioni di una funzione per la moltiplicazione di matrici. 
+
+Sono definiti cinque test distinti per verificare diversi aspetti della funzione di moltiplicazione delle matrici:
+
+    TestMultiplyMatrices: Verifica la corretta moltiplicazione di due matrici di dimensioni differenti.
+    HandlesEmptyMatrices: Controlla il comportamento della funzione quando le matrici di input sono vuote.
+    Handles1x1Matrix: Testa la moltiplicazione di due matrici di dimensione 1x1;
+    HandlesDifferentSizes: Verifica la moltiplicazione di due matrici 2x2 per confermare la corretta gestione delle matrici di dimensioni diverse ma compatibili.
+    HandlesNegativeValues: Verifica la corretta gestione dei valori negativi all'interno delle matrici durante la moltiplicazione.
+Oltre i 5 test unitari sono presenti anche uno stress test finalizzato a testare il funzionamento del codice nel caso di dimensioni di una matrice molto grandi ed un performance test che verifica
+se è possibile eseguire il programma all'interno di un lasso di tempo prestabilito.
+
+
